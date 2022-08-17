@@ -9,8 +9,28 @@ void _push(stack_t **stack, unsigned int line_number)
 {
 	char *arg;
 	int push_arg = 0;
+	int i = 0;
 
-	if (isdigit(arg) == 1 && arg != NULL)
+	arg = strtok(NULL, "\n\t ");
+
+	while (arg[i])
+	{
+		if (arg[i] >= 48 && arg[i] <=57)
+		{
+			push_arg = atoi(arg);
+			add_dnodeint(stack, push_arg);
+			i++;
+		}
+		else
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			error_exit(stack);
+		}
+	}
+
+	
+	
+/*	if (isdigit(arg) == 1 && arg != NULL)
 	{
 		push_arg = atoi(arg);
 		add_dnodeint_end(stack, push_arg);
@@ -19,7 +39,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		error_exit(stack);
-	}
+	}*/
 
 }
 
@@ -74,4 +94,32 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
 	else
 		free(new_node);
 	return (new_node);
+}
+
+stack_t *add_dnodeint(stack_t **head, const int n)
+{
+	stack_t *nnode = NULL;
+
+	nnode = malloc(sizeof(stack_t));
+	if (nnode == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed\n");
+		error_exit(head);
+	}
+
+
+	nnode->n = n;
+	if (*head)
+	{
+		nnode->next = *head;
+		nnode->prev = (*head)->prev;
+		(*head)->prev = nnode;
+		*head = nnode;
+		return (*head);
+	}
+
+	nnode->next = *head;
+	nnode->prev = NULL;
+	*head = nnode;
+	return (*head);
 }
