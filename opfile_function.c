@@ -16,6 +16,7 @@ void opfile(char *filename, stack_t **stack)
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		error_exit(stack);
 		return;
 	}
 	while ((read = getline(&buffer, &i, file)) != -1)
