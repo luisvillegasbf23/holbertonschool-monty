@@ -34,6 +34,7 @@ void opfile(char *filename, stack_t **stack)
 		if (s == NULL)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", str_cn, str);
+			error_exit(stack);
 			return;
 		}
 		s(stack, str_cn);
