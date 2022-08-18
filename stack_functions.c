@@ -11,11 +11,17 @@ void _push(stack_t **stack, unsigned int line_number)
 	int push_arg = 0;
 	int i = 0;
 
-	arg = strtok(NULL, "\n\t ");
-
-	while (arg[i])
+	if (stack)
 	{
-		if (arg[i] >= 48 && arg[i] <=57)
+		arg = strtok(NULL, "\n\t\r");
+		while (arg[i])
+		{
+		if (!arg[i])
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+		else if (isdigit(arg[i]) != 0)
 		{
 			push_arg = atoi(arg);
 			add_dnodeint(stack, push_arg);
@@ -24,23 +30,10 @@ void _push(stack_t **stack, unsigned int line_number)
 		else
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			error_exit(stack);
+			exit(EXIT_FAILURE);
+		}
 		}
 	}
-
-	
-	
-/*	if (isdigit(arg) == 1 && arg != NULL)
-	{
-		push_arg = atoi(arg);
-		add_dnodeint_end(stack, push_arg);
-	}
-	else
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		error_exit(stack);
-	}*/
-
 }
 
 /**
@@ -62,7 +55,7 @@ void _pall(stack_t **stack, __attribute__ ((unused))unsigned int line_number)
 }
 
 /**
- * *add_dnodeint_end - Write a function that adds a new node
+ * add_dnodeint_end - Write a function that adds a new node
  * at the end of a dlistint_t list.
  * @head: pointer to pointer head node
  * @n: data

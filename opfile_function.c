@@ -1,14 +1,16 @@
 #include "monty.h"
-
+/**
+ * opfile - open the monty file
+ * @filename: file name
+ * @stack: pointer to pointer
+ * Return: void
+ */
 void opfile(char *filename, stack_t **stack)
 {
-	char *buffer = NULL;
-	char *str;
+	char *buffer = NULL, *str = NULL;
 	size_t i = 0;
-	int str_cn = 1;
+	int str_cn = 1, read = 0;
 	instruct_func s;
-	/*int check;*/
-	int read = 0;
 
 	FILE *file = fopen(filename, "r");
 
@@ -19,9 +21,7 @@ void opfile(char *filename, stack_t **stack)
 	}
 	while ((read = getline(&buffer, &i, file)) != -1)
 	{
-				
-		str = strtok(buffer, " \t\n");
-
+		str = strtok(buffer, " \t\n\r");
 		if (str == NULL)
 		{
 			free(buffer);
@@ -30,13 +30,12 @@ void opfile(char *filename, stack_t **stack)
 			str_cn++;
 			continue;
 		}
-
 		s = func_cheq(str);
 		if (s == NULL)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", str_cn, str);
 			return;
-		}	
+		}
 		s(stack, str_cn);
 		free(buffer);
 		buffer = NULL;

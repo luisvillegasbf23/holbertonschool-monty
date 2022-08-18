@@ -1,0 +1,27 @@
+push 14954
+push 1021
+push 15175
+push 13943
+push 16772
+push 10705
+push 26912
+push 12030
+push 8681
+push 12439
+push 6013
+push 30630
+push 13841
+push 11289
+push 627
+push 10477
+push 30393
+push 31416
+push 10211
+push 9677
+push 15105
+push 16027
+push 13032
+push 10615
+push 11185
+push 25591
+pall
