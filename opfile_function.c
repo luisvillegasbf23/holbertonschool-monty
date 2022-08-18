@@ -11,8 +11,8 @@ void opfile(char *filename, stack_t **stack)
 	size_t i = 0;
 	int str_cn = 1, read = 0;
 	instruct_func s;
-
 	FILE *file = fopen(filename, "r");
+
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);

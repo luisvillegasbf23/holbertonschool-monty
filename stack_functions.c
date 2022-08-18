@@ -15,7 +15,7 @@ void _push(stack_t **stack, unsigned int line_number)
 
 	while (arg[i])
 	{
-		if (arg[i] >= 48 && arg[i] <=57)
+		if (arg[i] >= 48 && arg[i] <= 57)
 		{
 			push_arg = atoi(arg);
 			add_dnodeint(stack, push_arg);
