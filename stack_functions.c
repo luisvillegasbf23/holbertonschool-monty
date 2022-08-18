@@ -11,7 +11,23 @@ void _push(stack_t **stack, unsigned int line_number)
 	int push_arg = 0;
 	int i = 0;
 
-	if (stack)
+	arg = strtok(NULL, "\n\t\r ");
+
+	while (arg[i])
+	{
+		if (arg[i] >= 48 && arg[i] <=57)
+		{
+			push_arg = atoi(arg);
+			add_dnodeint(stack, push_arg);
+			i++;
+		}
+		else
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			error_exit(stack);
+		}
+	}
+	/*if (stack)
 	{
 		arg = strtok(NULL, "\n\t\r");
 		while (arg[i])
@@ -34,6 +50,7 @@ void _push(stack_t **stack, unsigned int line_number)
 		}
 		}
 	}
+	*/
 }
 
 /**
@@ -89,6 +106,13 @@ stack_t *add_dnodeint_end(stack_t **head, const int n)
 	return (new_node);
 }
 
+/**
+ * *add_dnodeint - Write a function that adds a new node at
+ * the beginning of a dlistint_t list.
+ * @head: pointer to pointer of head node
+ * @n: data
+ * Return: address of the new element or null
+ */
 stack_t *add_dnodeint(stack_t **head, const int n)
 {
 	stack_t *nnode = NULL;
