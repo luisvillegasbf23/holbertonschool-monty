@@ -17,9 +17,8 @@ void _push(stack_t **stack, unsigned int line_number)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		error_exit(stack);
-	}	
-	
-	for (i = 0; arg[i] != '\0';)	
+	}
+	for (i = 0; arg[i] != '\0';)
 	{
 		if (arg[0] == '-')
 		{
@@ -30,7 +29,6 @@ void _push(stack_t **stack, unsigned int line_number)
 		if (arg[i] >= 48 && arg[i] <= 57)
 		{
 			push_arg = atoi(arg);
-			
 			if (neg == 1)
 				push_arg = (push_arg * -1);
 
@@ -93,4 +91,27 @@ void _pop(stack_t **stack, unsigned int line_number)
 		error_exit(stack);
 	}
 	delete_dnodeint_at_index(stack, 0);
+}
+
+/**
+ * _swap - swap top of and second top from stack
+ * @stack: pointer to linked list stack
+ * @line_number: number of line opcode occurs on
+ *
+ */
+void _swap(stack_t **stack, unsigned int line_number)
+{
+	stack_t *runner;
+	int tmp;
+
+	runner = *stack;
+
+	if(runner == NULL || runner->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		error_exit(stack);
+	}
+	tmp = runner->n;
+	runner->n = runner->next->n;
+	runner->next->n = tmp;
 }

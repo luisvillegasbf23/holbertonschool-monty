@@ -17,6 +17,7 @@ instruct_func func_cheq(char *str)
 		{"pall", _pall},
 		{"pint", _pint},
 		{"pop", _pop},
+		{"swap", _swap},
 		{NULL, NULL},
 	};
 
@@ -24,11 +25,10 @@ instruct_func func_cheq(char *str)
 	while (instruct[i].f != NULL)
 	{
 		if (str != NULL && strcmp(instruct[i].opcode, str) == 0)
-		{	
+		{
 			return (instruct[i].f);
 		}
 		i++;
-		
 	}
 
 	return (instruct[i].f);
