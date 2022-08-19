@@ -12,20 +12,22 @@ void _push(stack_t **stack, unsigned int line_number)
 	int i = 0;
 
 	arg = strtok(NULL, "\n\t\r ");
-
+	if (!arg)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		error_exit(stack);
+	}		
 	while (arg[i])
 	{
-		if (!arg[i])
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-		else if (arg[i] >= 48 && arg[i] <= 57)
+		if (arg[0] == '-')
+			i++;
+
+		if (arg[i] >= 48 && arg[i] <= 57)
 		{
 			push_arg = atoi(arg);
 			add_dnodeint(stack, push_arg);
-			i++;
 		}
+		i++;
 	}
 }
 /**

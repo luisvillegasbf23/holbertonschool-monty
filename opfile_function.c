@@ -30,7 +30,7 @@ void opfile(char *filename, stack_t **stack)
 			str_cn++;
 			continue;
 		}
-		s = func_cheq(str);
+		s = func_cheq(str, stack, str_cn);
 		if (s == NULL)
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", str_cn, str);

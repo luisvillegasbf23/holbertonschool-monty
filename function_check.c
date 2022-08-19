@@ -7,9 +7,10 @@
  * Return: returns a function, or NULL on failure
  */
 
-instruct_func func_cheq(char *str)
+instruct_func func_cheq(char *str, stack_t **stack, unsigned int line_number)
 {
 	int i;
+	char *token = NULL;
 
 	instruction_t instruct[] = {
 		{"push", _push},
@@ -21,8 +22,11 @@ instruct_func func_cheq(char *str)
 	while (instruct[i].f != NULL)
 	{
 		if (str != NULL && strcmp(instruct[i].opcode, str) == 0)
+		{	
 			return (instruct[i].f);
+		}
 		i++;
+		
 	}
 
 	return (instruct[i].f);

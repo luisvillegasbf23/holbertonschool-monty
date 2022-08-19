@@ -38,13 +38,13 @@ typedef struct instruction_s
 
 typedef void (*instruct_func)(stack_t **stack, unsigned int line_number);
 
-instruct_func func_cheq(char *str);
+instruct_func func_cheq(char *str, stack_t **stack, unsigned int line_number);
 
 /**
  * FUNCTION PROTOTIPES
  */
 void opfile(char *filename, stack_t **stack);
-instruct_func func_cheq(char *str);
+instruct_func func_cheq(char *str, stack_t **stack, unsigned int line_number);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *head);
