@@ -52,5 +52,6 @@ void error_exit(stack_t **stack);
 stack_t *add_dnodeint_end(stack_t **head, const int n);
 stack_t *add_dnodeint(stack_t **head, const int n);
 void _pint(stack_t **stack, unsigned int line_number);
+void _pop(stack_t **stack, unsigned int line_number);
 
 #endif 

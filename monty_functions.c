@@ -79,3 +79,19 @@ void _pint(stack_t **stack, unsigned int line_number)
 		error_exit(stack);
 	}
 }
+
+/**
+ * _pop - removes the top element of the stack
+ * @stack: first node of the stack
+ * @line_number: number line
+ * Return: void
+ */
+void _pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *aux = *stack;
+
+	(void)line_number;
+
+	*stack = (*stack)->next;
+	free(aux);
+}
