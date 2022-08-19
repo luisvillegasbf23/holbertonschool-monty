@@ -16,6 +16,7 @@ instruct_func func_cheq(char *str)
 		{"push", _push},
 		{"pall", _pall},
 		{"pint", _pint},
+		{"pop", _pop},
 		{NULL, NULL},
 	};
 
