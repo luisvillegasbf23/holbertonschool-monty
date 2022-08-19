@@ -81,17 +81,16 @@ void _pint(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * _pop - removes the top element of the stack
- * @stack: first node of the stack
- * @line_number: number line
- * Return: void
+ * _pop - delete item at top of stack
+ * @stack: pointer to linked list stack
+ * @line_number: number of line opcode occurs on
  */
 void _pop(stack_t **stack, unsigned int line_number)
 {
-	stack_t *aux = *stack;
-
-	(void)line_number;
-
-	*stack = (*stack)->next;
-	free(aux);
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		error_exit(stack);
+	}
+	delete_dnodeint_at_index(stack, 0);
 }
