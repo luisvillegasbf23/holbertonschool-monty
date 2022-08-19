@@ -90,7 +90,8 @@ void _pop(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
 		error_exit(stack);
 	}
-	delete_dnodeint_at_index(stack, 0);
+	//delete_dnodeint_at_index(stack, 0);
+	*stack = (*stack)->next;
 }
 
 /**
@@ -102,7 +103,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 void _swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *runner;
-	int tmp;
+	int tmp = 0;
 
 	runner = *stack;
 
