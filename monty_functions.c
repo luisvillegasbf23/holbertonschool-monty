@@ -10,24 +10,39 @@ void _push(stack_t **stack, unsigned int line_number)
 	char *arg;
 	int push_arg = 0;
 	int i = 0;
+	int neg = 0;
 
 	arg = strtok(NULL, "\n\t\r ");
 	if (!arg)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		error_exit(stack);
-	}		
-	while (arg[i])
+	}	
+	
+	for (i = 0; arg[i] != '\0';)	
 	{
 		if (arg[0] == '-')
-			i++;
+		{
+			neg = 1;
+			continue;
+		}
 
 		if (arg[i] >= 48 && arg[i] <= 57)
 		{
 			push_arg = atoi(arg);
+			
+			if (neg == 1)
+				push_arg = (push_arg * -1);
+
 			add_dnodeint(stack, push_arg);
+			i++;
 		}
-		i++;
+		else
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			error_exit(stack);
+			i++;
+		}
 	}
 }
 /**
@@ -48,29 +63,19 @@ void _pall(stack_t **stack, __attribute__ ((unused))unsigned int line_number)
 	}
 }
 
-/*
+/**
+ * _pint - print int a top of stack
+ * @stack: pointer to linked list stack
+ * @line_number: number of line opcode occurs on
  *
- * if (stack)
- * {
-	arg = strtok(NULL, "\n\t\r");
-	while (arg[i])
+ */
+void _pint(stack_t **stack, unsigned int line_number)
+{
+	if (*stack != NULL)
+		printf("%d\n", (*stack)->n);
+	else
 	{
-		if (!arg[i])
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-		else if (isdigit(arg[i]) != 0)
-		{
-			push_arg = atoi(arg);
-			add_dnodeint(stack, push_arg);
-			i++;
-		}
-		else
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		error_exit(stack);
 	}
 }
-*/
